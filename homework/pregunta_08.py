@@ -5,7 +5,6 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_08():
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla
@@ -27,3 +26,27 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    file_path = 'files/input/data.csv'
+    
+    values_letters = {}
+
+    with open(file_path, 'r') as file:
+        for line in file:
+            columns = line.strip().split('\t')
+            if columns:
+                letter = columns[0]
+                number = int(columns[1])
+
+                if number in values_letters:
+                    values_letters[number].append(letter)
+                else:
+                    values_letters[number] = [letter]
+
+    result = []
+    for key, value in values_letters.items():
+        unique_letters = sorted(set(value))
+        result.append((key, unique_letters))
+    
+    result.sort()
+
+    return result

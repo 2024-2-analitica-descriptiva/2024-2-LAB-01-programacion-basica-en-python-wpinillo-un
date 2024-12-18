@@ -5,7 +5,6 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_10():
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la
@@ -20,3 +19,18 @@ def pregunta_10():
 
 
     """
+    file_path = 'files/input/data.csv'
+    
+    result = []
+
+    with open(file_path, 'r') as file:
+        for line in file:
+            columns = line.strip().split('\t')
+            if columns:
+                letter = columns[0]
+                col_4_elements = columns[3].split(',')
+                col_5_elements = columns[4].split(',')
+
+                result.append((letter, len(col_4_elements), len(col_5_elements)))
+
+    return result
